@@ -34,8 +34,8 @@ export default function FeaturesPlanet() {
                     src={PlanetOverlayImg}
                     width={789}
                     height={755}
-                    alt="Planet decoration" */}
-                  />
+                    alt="Planet decoration"
+                  /> */}
                   <div>
                       {/* <Image
                         className="absolute -left-28 top-16 z-10 animate-[float_4s_ease-in-out_infinite_both] opacity-80 transition-opacity duration-500"
