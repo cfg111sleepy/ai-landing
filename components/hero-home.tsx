@@ -1,11 +1,19 @@
+"use client";
+
 import Image from "next/image";
 import PageIllustration from "@/components/page-illustration";
-import Avatar01 from "@/public/images/avatar-01.jpg";
-import Avatar02 from "@/public/images/avatar-02.jpg";
-import Avatar03 from "@/public/images/avatar-03.jpg";
-import Avatar04 from "@/public/images/avatar-04.jpg";
+import Avatar01 from "@/public/images/test5.jpeg";
+import Avatar02 from "@/public/images/123.png";
+import Avatar03 from "@/public/images/n8n.png";
+import Avatar04 from "@/public/images/test555.jpeg";
 import Avatar05 from "@/public/images/avatar-05.jpg";
 import Avatar06 from "@/public/images/avatar-06.jpg";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Workflow01 from "@/public/images/workflow-01.png";
+import Workflow02 from "@/public/images/workflow-02.png";
+import Workflow03 from "@/public/images/workflow-03.png";
 
 export default function HeroHome() {
   return (
@@ -16,55 +24,6 @@ export default function HeroHome() {
         <div className="pt-32 md:pt-40">
           {/* Section header */}
           <div className="pb-12 text-center md:pb-16">
-            {/* <div
-              className="mb-6"
-              data-aos="zoom-y-out"
-            >
-              <div className="-mx-0.5 flex justify-center -space-x-3">
-                <Image
-                  className="box-content rounded-full border-2 border-gray-50"
-                  src={Avatar01}
-                  width={32}
-                  height={32}
-                  alt="Avatar 01"
-                />
-                <Image
-                  className="box-content rounded-full border-2 border-gray-50"
-                  src={Avatar02}
-                  width={32}
-                  height={32}
-                  alt="Avatar 01"
-                />
-                <Image
-                  className="box-content rounded-full border-2 border-gray-50"
-                  src={Avatar03}
-                  width={32}
-                  height={32}
-                  alt="Avatar 02"
-                />
-                <Image
-                  className="box-content rounded-full border-2 border-gray-50"
-                  src={Avatar04}
-                  width={32}
-                  height={32}
-                  alt="Avatar 03"
-                />
-                <Image
-                  className="box-content rounded-full border-2 border-gray-50"
-                  src={Avatar05}
-                  width={32}
-                  height={32}
-                  alt="Avatar 04"
-                />
-                <Image
-                  className="box-content rounded-full border-2 border-gray-50"
-                  src={Avatar06}
-                  width={32}
-                  height={32}
-                  alt="Avatar 05"
-                />
-              </div>
-            </div> */}
             <h1
               className="mb-6 border-y font-bold [border-image:linear-gradient(to_right,transparent,--theme(--color-slate-300/.8),transparent)1] md:text-4xl"
               data-aos="zoom-y-out"
@@ -80,6 +39,39 @@ export default function HeroHome() {
               >
                 Оптимизирует ведение аккаунтов в X, Telegram и других соцсетях: контент, активность, анализ трендов. Подходит для личных брендов, маркетологов и фарм-аккаунтов.
               </p>
+              <div className="mx-auto max-w-2xl mb-8 animate-fade-in" data-aos="zoom-y-out" data-aos-delay={200}>
+                <Slider
+                  dots={true}
+                  infinite={true}
+                  speed={500}
+                  slidesToShow={1}
+                  slidesToScroll={1}
+                  arrows={false}
+                  className="rounded-2xl overflow-hidden shadow-xl border border-gray-200"
+                >
+                  <div>
+                    <Image
+                      src={Avatar01}
+                      alt="Workflow 1"
+                      className="w-full h-80 object-fill"
+                    />
+                  </div>
+                  <div>
+                    <Image
+                      src={Avatar02}
+                      alt="Workflow 2"
+                      className="w-full h-80 object-fill"
+                    />
+                  </div>
+                  <div>
+                    <Image
+                      src={Avatar03}
+                      alt="Workflow 3"
+                      className="w-full h-80 object-fill"
+                    />
+                  </div>
+                </Slider>
+              </div>
               <div className="">
                 <div
                   className="mx-auto max-w-xs sm:flex sm:max-w-none sm:justify-center"
@@ -107,7 +99,7 @@ export default function HeroHome() {
               </div>
             </div>
           </div>
-          <div className="mt-6 flex flex-col items-center justify-center">
+          {/* <div className="mt-6 flex flex-col items-center justify-center">
             <h2 className="md:text-2xl font-bold text-black-700 mb-5 text-center">
                 Основа архитектуры — 
                 <a
@@ -132,7 +124,7 @@ export default function HeroHome() {
                 className="w-full h-full"
               ></iframe>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>

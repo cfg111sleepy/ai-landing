@@ -18,10 +18,10 @@ export default function Home() {
       <Hero />
       <BusinessCategories />
       <FeaturesPlanet />
-      <div className="max-w-6xl mx-auto">
+      <VersionSelector />
+      <div className="mb-8 max-w-6xl mx-auto">
         <TerminalInstallN8N />
       </div>
-      <VersionSelector />
       <Testimonials />
       <Cta />
     </>
