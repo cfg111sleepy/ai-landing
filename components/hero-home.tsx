@@ -5,19 +5,30 @@ import PageIllustration from "@/components/page-illustration";
 import Avatar01 from "@/public/images/test5.jpeg";
 import Avatar02 from "@/public/images/123.png";
 import Avatar03 from "@/public/images/n8n.png";
-import Avatar04 from "@/public/images/test555.jpeg";
-import Avatar05 from "@/public/images/avatar-05.jpg";
-import Avatar06 from "@/public/images/avatar-06.jpg";
+import Avatar04 from "@/public/images/111.png";
+import Avatar05 from "@/public/images/222.png";
+import Avatar06 from "@/public/images/333.png";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Workflow01 from "@/public/images/workflow-01.png";
 import Workflow02 from "@/public/images/workflow-02.png";
 import Workflow03 from "@/public/images/workflow-03.png";
+import { useState } from "react";
+import { FaSearchPlus } from "react-icons/fa";
 
 export default function HeroHome() {
+  const [enlargedIndex, setEnlargedIndex] = useState<number | null>(null);
+  const avatars = [
+    { src: Avatar01, alt: "Workflow 1" },
+    { src: Avatar02, alt: "Workflow 2" },
+    { src: Avatar03, alt: "Workflow 3" },
+    { src: Avatar04, alt: "Workflow 1" },
+    { src: Avatar05, alt: "Workflow 2" },
+    { src: Avatar06, alt: "Workflow 3" },
+  ];
   return (
-    <section className="relative">
+    <section id="hero-home" className="relative">
       <PageIllustration />
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         {/* Hero content */}
@@ -49,28 +60,46 @@ export default function HeroHome() {
                   arrows={false}
                   className="rounded-2xl overflow-hidden shadow-xl border border-gray-200"
                 >
-                  <div>
-                    <Image
-                      src={Avatar01}
-                      alt="Workflow 1"
-                      className="w-full h-80 object-fill"
-                    />
-                  </div>
-                  <div>
-                    <Image
-                      src={Avatar02}
-                      alt="Workflow 2"
-                      className="w-full h-80 object-fill"
-                    />
-                  </div>
-                  <div>
-                    <Image
-                      src={Avatar03}
-                      alt="Workflow 3"
-                      className="w-full h-80 object-fill"
-                    />
-                  </div>
+                  {avatars.map((avatar, idx) => (
+                    <div key={idx} className="relative">
+                      <Image
+                        src={avatar.src}
+                        alt={avatar.alt}
+                        className="w-full h-80 object-fill"
+                      />
+                      <button
+                        className="absolute top-2 right-2 bg-white bg-opacity-80 rounded-full p-2 shadow hover:bg-opacity-100 transition"
+                        onClick={() => setEnlargedIndex(idx)}
+                        aria-label="Enlarge image"
+                        type="button"
+                      >
+                        <FaSearchPlus className="text-xl text-gray-700" />
+                      </button>
+                    </div>
+                  ))}
                 </Slider>
+                {/* Modal for enlarged image */}
+                {enlargedIndex !== null && (
+                  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-90">
+                    <button
+                      className="absolute top-4 right-4 bg-white bg-opacity-80 rounded-full p-2 shadow hover:bg-opacity-100 transition z-50"
+                      onClick={() => setEnlargedIndex(null)}
+                      aria-label="Close enlarged image"
+                      type="button"
+                    >
+                      <span className="text-2xl">&times;</span>
+                    </button>
+                    <div className="flex items-center justify-center w-full h-full">
+                      <Image
+                        src={avatars[enlargedIndex].src}
+                        alt={avatars[enlargedIndex].alt}
+                        className="object-contain"
+                        style={{ zIndex: '20', width: '75vw', height: '75vh', maxWidth: '75vw', maxHeight: '75vh' }}
+                        priority
+                      />
+                    </div>
+                  </div>
+                )}
               </div>
               <div className="">
                 <div

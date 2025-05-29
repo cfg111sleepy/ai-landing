@@ -4,118 +4,63 @@ import Logo from "./logo";
 export default function Footer({ border = false }: { border?: boolean }) {
   return (
     <footer>
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
+      <div className="mt-10 mb-10 mx-auto max-w-6xl w-full px-4 sm:px-6">
         {/* Top area: Blocks */}
         <div
-          className={`grid gap-10 py-8 sm:grid-cols-12 md:py-12 ${border ? "border-t [border-image:linear-gradient(to_right,transparent,var(--color-slate-200),transparent)1]" : ""}`}
+          className={`flex flex-row w-full justify-between items-start gap-8 ${border ? "border-t [border-image:linear-gradient(to_right,transparent,var(--color-slate-200),transparent)1]" : ""}`}
         >
           {/* 1st block */}
-          <div className="space-y-2 sm:col-span-12 lg:col-span-4">
+          <div className="flex flex-col h-full justify-end min-w-[180px] max-w-[240px]">
             <div>
               <Logo />
             </div>
             <div className="text-sm text-gray-600">
-              &copy; Cruip.com - All rights reserved.
+              &copy; Cruip.com — Все права защищены.
             </div>
           </div>
 
           {/* 2nd block */}
-          <div className="space-y-2 sm:col-span-6 md:col-span-3 lg:col-span-2">
-            <h3 className="text-sm font-medium">Product</h3>
+          <div className="flex flex-col h-full justify-end min-w-[180px] max-w-[240px]">
+            <h3 className="text-sm font-medium">Продукт</h3>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link
                   className="text-gray-600 transition hover:text-gray-900"
-                  href="#0"
+                  href="#features-planet"
                 >
-                  Features
+                  Возможности
                 </Link>
               </li>
               <li>
                 <Link
                   className="text-gray-600 transition hover:text-gray-900"
-                  href="#0"
+                  href="#hero-home"
                 >
-                  Integrations
+                  Интеграции
                 </Link>
               </li>
               <li>
                 <Link
                   className="text-gray-600 transition hover:text-gray-900"
-                  href="#0"
+                  href="#version-selector"
                 >
-                  Pricing & Plans
+                  Тарифы и планы
                 </Link>
               </li>
               <li>
                 <Link
                   className="text-gray-600 transition hover:text-gray-900"
-                  href="#0"
+                  href="#testimonials"
                 >
-                  Changelog
-                </Link>
-              </li>
-              <li>
-                <Link
-                  className="text-gray-600 transition hover:text-gray-900"
-                  href="#0"
-                >
-                  Our method
+                  Наш подход
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* 3rd block */}
-          <div className="space-y-2 sm:col-span-6 md:col-span-3 lg:col-span-2">
-            <h3 className="text-sm font-medium">Company</h3>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <Link
-                  className="text-gray-600 transition hover:text-gray-900"
-                  href="#0"
-                >
-                  About us
-                </Link>
-              </li>
-              <li>
-                <Link
-                  className="text-gray-600 transition hover:text-gray-900"
-                  href="#0"
-                >
-                  Diversity & Inclusion
-                </Link>
-              </li>
-              <li>
-                <Link
-                  className="text-gray-600 transition hover:text-gray-900"
-                  href="#0"
-                >
-                  Blog
-                </Link>
-              </li>
-              <li>
-                <Link
-                  className="text-gray-600 transition hover:text-gray-900"
-                  href="#0"
-                >
-                  Careers
-                </Link>
-              </li>
-              <li>
-                <Link
-                  className="text-gray-600 transition hover:text-gray-900"
-                  href="#0"
-                >
-                  Financial statements
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* 4th block */}
-          <div className="space-y-2 sm:col-span-6 md:col-span-3 lg:col-span-2">
-            <h3 className="text-sm font-medium">Resources</h3>
+          {/* 3rd block (Resources) */}
+          <div className="flex flex-col h-full justify-end min-w-[180px] max-w-[240px]">
+            <h3 className="text-sm font-medium">Ресурсы</h3>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link
@@ -144,15 +89,17 @@ export default function Footer({ border = false }: { border?: boolean }) {
             </ul>
           </div>
 
-          {/* 5th block */}
-          <div className="space-y-2 sm:col-span-6 md:col-span-3 lg:col-span-2">
+          {/* 4th block (Social) */}
+          <div className="flex flex-col h-full justify-end min-w-[180px] max-w-[240px]">
             <h3 className="text-sm font-medium">Social</h3>
             <ul className="flex gap-1">
               <li>
                 <Link
                   className="flex items-center justify-center text-blue-500 transition hover:text-blue-600"
-                  href="#0"
+                  href="https://x.com/n8n_io"
                   aria-label="Twitter"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   <svg
                     className="h-8 w-8 fill-current"
@@ -166,8 +113,10 @@ export default function Footer({ border = false }: { border?: boolean }) {
               <li>
                 <Link
                   className="flex items-center justify-center text-blue-500 transition hover:text-blue-600"
-                  href="#0"
+                  href="https://medium.com/data-and-beyond/part-1-introduction-to-n8n-what-it-is-and-how-it-works-74c214de769e"
                   aria-label="Medium"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   <svg
                     className="h-8 w-8 fill-current"
@@ -181,8 +130,10 @@ export default function Footer({ border = false }: { border?: boolean }) {
               <li>
                 <Link
                   className="flex items-center justify-center text-blue-500 transition hover:text-blue-600"
-                  href="#0"
+                  href="https://github.com/n8n-io/n8n"
                   aria-label="Github"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   <svg
                     className="h-8 w-8 fill-current"

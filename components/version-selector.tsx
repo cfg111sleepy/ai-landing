@@ -51,7 +51,7 @@ const versions = [
 	},
 	{
 		name: "Farm",
-		details: "Неограниченно каналов. API-доступ. Персональный менеджер. Для крупных проектов.",
+		details: "Неограниченно каналов. API-доступ. Персональный менеджер.",
 		price: "4990₽/мес",
 		points: [
 			"10+ аккаунтов (до 100)",
@@ -101,7 +101,7 @@ function CustomArrow({ direction, currentSlide, slideCount, ...props }: { direct
 
 export default function VersionSelector() {
 	return (
-		<section className="my-8">
+		<section id="version-selector" className="my-8">
 			<h3 className="text-center text-2xl font-bold mb-4">Выберите версию:</h3>
 			<div className="max-w-6xl mx-auto">
 				<Slider {...settings}>
