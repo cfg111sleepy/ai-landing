@@ -65,25 +65,31 @@ export default function Footer({ border = false }: { border?: boolean }) {
               <li>
                 <Link
                   className="text-gray-600 transition hover:text-gray-900"
-                  href="#0"
+                  href="https://n8n.io/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  Community
+                  N8n - Официальный сайт
                 </Link>
               </li>
               <li>
                 <Link
                   className="text-gray-600 transition hover:text-gray-900"
-                  href="#0"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href="https://docs.n8n.io/?_gl=1*sr5jhd*_gcl_au*MTg3Nzg5MDI5NC4xNzQzNjA0OTY2*_ga*MTUzMjAwODcwNi4xNzQzNjA0OTY3*_ga_0SC4FF2FH9*czE3NDg1MjEyOTMkbzE5JGcwJHQxNzQ4NTIxMjkzJGo2MCRsMCRoMA.."
                 >
-                  Terms of service
+                  N8n - Документация 
                 </Link>
               </li>
               <li>
                 <Link
                   className="text-gray-600 transition hover:text-gray-900"
-                  href="#0"
+                  href="https://n8n.io/support/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  Report a vulnerability
+                  N8n - Поддержка
                 </Link>
               </li>
             </ul>

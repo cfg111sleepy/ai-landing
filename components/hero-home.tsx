@@ -104,7 +104,6 @@ export default function HeroHome() {
               <div className="">
                 <div
                   className="mx-auto max-w-xs sm:flex sm:max-w-none sm:justify-center"
-                  data-aos="zoom-y-out"
                   data-aos-delay={450}
                 >
                   <a
