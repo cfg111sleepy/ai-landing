@@ -7,10 +7,10 @@ export default function Footer({ border = false }: { border?: boolean }) {
       <div className="mt-10 mb-10 mx-auto max-w-6xl w-full px-4 sm:px-6">
         {/* Top area: Blocks */}
         <div
-          className={`flex flex-row w-full justify-between items-start gap-8 ${border ? "border-t [border-image:linear-gradient(to_right,transparent,var(--color-slate-200),transparent)1]" : ""}`}
+          className={`flex flex-col md:flex-row w-full justify-between items-stretch md:items-start gap-8 ${border ? "border-t [border-image:linear-gradient(to_right,transparent,var(--color-slate-200),transparent)1]" : ""}`}
         >
           {/* 1st block */}
-          <div className="flex flex-col h-full justify-end min-w-[180px] max-w-[240px]">
+          <div className="flex flex-col h-full justify-end min-w-[180px] max-w-[240px] flex-1" >
             <div>
               <Logo />
             </div>
@@ -20,7 +20,7 @@ export default function Footer({ border = false }: { border?: boolean }) {
           </div>
 
           {/* 2nd block */}
-          <div className="flex flex-col h-full justify-end min-w-[180px] max-w-[240px]">
+          <div className="flex flex-col h-full justify-end min-w-[180px] max-w-[240px] flex-1" >
             <h3 className="text-sm font-medium">Продукт</h3>
             <ul className="space-y-2 text-sm">
               <li>
@@ -59,7 +59,7 @@ export default function Footer({ border = false }: { border?: boolean }) {
           </div>
 
           {/* 3rd block (Resources) */}
-          <div className="flex flex-col h-full justify-end min-w-[180px] max-w-[240px]">
+          <div className="flex flex-col h-full justify-end min-w-[180px] max-w-[240px] flex-1" >
             <h3 className="text-sm font-medium">Ресурсы</h3>
             <ul className="space-y-2 text-sm">
               <li>
@@ -96,8 +96,8 @@ export default function Footer({ border = false }: { border?: boolean }) {
           </div>
 
           {/* 4th block (Social) */}
-          <div className="flex flex-col h-full justify-end min-w-[180px] max-w-[240px]">
-            <h3 className="text-sm font-medium">Social</h3>
+          <div className="flex flex-col h-full justify-end min-w-[180px] max-w-[240px] flex-1" >
+            <h3 className="text-sm font-medium">Социальные сети</h3>
             <ul className="flex gap-1">
               <li>
                 <Link
