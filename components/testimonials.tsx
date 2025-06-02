@@ -370,7 +370,7 @@ export function Testimonial({
                   width={16}
                   height={16}
                   className="inline-block align-middle"
-                  style={{ filter: 'brightness(0) invert(1)' }}
+                  style={{ filter: 'brightness(0) invert(1)', width: 16, height: 'auto' }}
                 />
               </span>
               <span className="ml-1 text-gray-400">{testimonial.company}</span>

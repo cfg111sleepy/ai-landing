@@ -197,6 +197,10 @@ export default function Footer({ border = false }: { border?: boolean }) {
             margin-bottom: 1.5rem !important;
           }
         }
+        /* Fix Next.js Image aspect ratio warning for stripes-dark.svg */
+        img[src*="stripes-dark"] {
+          height: auto !important;
+        }
       `}</style>
     </footer>
   );

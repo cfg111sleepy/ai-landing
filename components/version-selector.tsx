@@ -100,17 +100,17 @@ function CustomArrow({ direction, currentSlide, slideCount, ...props }: { direct
 	);
 }
 
-const filterOptions = ["Monthly", "6 Months", "Yearly"] as const;
+const filterOptions = ["Ежемесячно", "6 Mесяцев", "Ежегодно"] as const;
 type FilterOption = typeof filterOptions[number];
 
 const priceMapping: Record<FilterOption, string[]> = {
-	Monthly: ["0₽", "499₽/мес", "1990₽/мес", "4990₽/мес"],
-	"6 Months": ["0₽", "2994₽", "11940₽", "29940₽"],
-	Yearly: ["0₽", "4990₽", "19900₽", "49900₽"],
+	"Ежемесячно": ["0₽", "499₽/мес", "1990₽/мес", "4990₽/мес"],
+	"6 Mесяцев": ["0₽", "2994₽", "11940₽", "29940₽"],
+	"Ежегодно": ["0₽", "4990₽", "19900₽", "49900₽"],
 };
 
 export default function VersionSelector() {
-	const [selectedFilter, setSelectedFilter] = useState<FilterOption>("Monthly");
+	const [selectedFilter, setSelectedFilter] = useState<FilterOption>("Ежемесячно");
 	const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 	const [visible, setVisible] = useState<boolean[]>(() => versions.map(() => false));
 
