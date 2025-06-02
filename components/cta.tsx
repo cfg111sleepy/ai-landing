@@ -1,24 +1,42 @@
+"use client";
 import Image from "next/image";
 import Stripes from "@/public/images/stripes-dark.svg";
+import { useRef, useEffect, useState } from "react";
 
 export default function Cta() {
+  const ctaRef = useRef<HTMLDivElement | null>(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    if (!ctaRef.current) return;
+    const observer = new window.IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { threshold: 0.2 }
+    );
+    observer.observe(ctaRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section>
       <div className="mt-6 mx-auto max-w-6xl px-4 sm:px-6">
         <div
-          className="relative overflow-hidden rounded-2xl text-center shadow-xl before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:rounded-2xl before:bg-gray-900"
-          data-aos="zoom-y-out"
+          ref={ctaRef}
+          className={`relative overflow-visible rounded-2xl text-center shadow-xl before:pointer-events-none before:absolute before:inset-0 before:-z-10 before:rounded-2xl before:bg-gray-900 transition-all duration-700 ${
+            inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+          }`}
+          style={{ transitionProperty: "opacity, transform" }}
         >
           {/* Glow */}
           <div
-            className="absolute bottom-0 left-1/2 -z-10 -translate-x-1/2 translate-y-1/2"
+            className="absolute bottom-0 left-1/2 -z-10 -translate-x-1/2 translate-y-1/2 pointer-events-none"
             aria-hidden="true"
           >
             <div className="h-56 w-[480px] rounded-full border-[20px] border-blue-500 blur-3xl" />
           </div>
           {/* Stripes illustration */}
           <div
-            className="pointer-events-none absolute left-1/2 top-0 -z-10 -translate-x-1/2 transform"
+            className="pointer-events-none absolute left-1/2 top-0 -z-10 -translate-x-1/2"
             aria-hidden="true"
           >
             <Image
@@ -27,6 +45,7 @@ export default function Cta() {
               width={768}
               height={432}
               alt="Stripes"
+              priority
             />
           </div>
           <div className="px-4 py-12 md:px-12 md:py-20">

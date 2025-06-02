@@ -362,19 +362,19 @@ export default function BusinessCategories() {
 
   return (
     <section className="overflow-hidden">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <h2 className="my-8 text-center font-bold text-xl md:text-2xl px-4">
+      <div className="mx-auto max-w-6xl px-2 sm:px-6">
+        <h2 className="my-8 text-center font-bold text-lg xs:text-xl md:text-2xl px-2 sm:px-4">
           Интеграция с Twitter, Telegram, Reddit, Discord и другими
         </h2>
-        <div className="pb-12 md:pb-20">
-          <div className="slider-container -mx-4 sm:mx-0">
+        <div className="pb-8 md:pb-20">
+          <div className="slider-container -mx-2 sm:mx-0">
             {/* @ts-expect-error: Slider is dynamically imported and typed as any */}
             <Slider {...settings}>
               {icons.map((icon, idx) => (
                 <div
                   key={idx}
                   ref={el => (iconRefs.current[idx] = el)}
-                  className={`flex justify-center items-center p-4 transition-all duration-700
+                  className={`flex justify-center items-center p-2 sm:p-4 transition-all duration-700
                     ${visible[idx]
                       ? `animate-[bounce-scale_1000ms_ease-out_${idx * 150}ms_forwards]`
                       : ""
@@ -383,7 +383,7 @@ export default function BusinessCategories() {
                     transitionDelay: visible[idx] ? `${idx * 150}ms` : "0ms",
                   }}
                 >
-                  <div className="transform transition duration-300 hover:scale-110">
+                  <div className="transform transition duration-300 hover:scale-110 bg-white rounded-xl shadow-sm p-2 sm:p-4 w-16 h-16 sm:w-20 sm:h-20 flex items-center justify-center">
                     {icon}
                   </div>
                 </div>
@@ -392,6 +392,22 @@ export default function BusinessCategories() {
           </div>
         </div>
       </div>
+      <style jsx global>{`
+        @media (max-width: 640px) {
+          .slider-container .slick-slide > div {
+            padding-left: 0.25rem !important;
+            padding-right: 0.25rem !important;
+          }
+          .slider-container .slick-dots {
+            bottom: -18px !important;
+          }
+          .slider-container .slick-slide div > div {
+            width: 48px !important;
+            height: 48px !important;
+            padding: 0.5rem !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }

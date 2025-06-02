@@ -1,31 +1,53 @@
 import Link from "next/link";
 import Logo from "./logo";
+import { useRef, useEffect, useState } from "react";
 
 export default function Footer({ border = false }: { border?: boolean }) {
+  const footerRef = useRef<HTMLDivElement | null>(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    if (!footerRef.current) return;
+    const observer = new window.IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { threshold: 0.2 }
+    );
+    observer.observe(footerRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <footer>
-      <div className="mt-10 mb-10 mx-auto max-w-6xl w-full px-4 sm:px-6">
+      <div
+        ref={footerRef}
+        className={`mt-10 mb-10 mx-auto max-w-6xl w-full px-4 sm:px-6 transition-all duration-700 ${
+          inView
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 translate-y-8"
+        }`}
+        style={{ transitionProperty: "opacity, transform" }}
+      >
         {/* Top area: Blocks */}
         <div
           className={`flex flex-col md:flex-row w-full justify-between items-stretch md:items-start gap-8 ${border ? "border-t [border-image:linear-gradient(to_right,transparent,var(--color-slate-200),transparent)1]" : ""}`}
         >
           {/* 1st block */}
-          <div className="flex flex-col h-full justify-end min-w-[180px] max-w-[240px] flex-1" >
+          <div className="flex flex-col h-full justify-end min-w-[180px] max-w-[240px] flex-1 mb-8 md:mb-0">
             <div>
               <Logo />
             </div>
-            <div className="text-sm text-gray-600">
+            <div className="text-sm text-gray-600 mt-2">
               &copy; Cruip.com — Все права защищены.
             </div>
           </div>
 
           {/* 2nd block */}
-          <div className="flex flex-col h-full justify-end min-w-[180px] max-w-[240px] flex-1" >
-            <h3 className="text-sm font-medium">Продукт</h3>
+          <div className="flex flex-col h-full justify-end min-w-[180px] max-w-[240px] flex-1 mb-8 md:mb-0">
+            <h3 className="text-sm font-medium mb-2">Продукт</h3>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link
-                  className="text-gray-600 transition hover:text-gray-900"
+                  className="text-gray-600 transition hover:text-gray-900 hover:underline underline-offset-4"
                   href="#features-planet"
                 >
                   Возможности
@@ -33,7 +55,7 @@ export default function Footer({ border = false }: { border?: boolean }) {
               </li>
               <li>
                 <Link
-                  className="text-gray-600 transition hover:text-gray-900"
+                  className="text-gray-600 transition hover:text-gray-900 hover:underline underline-offset-4"
                   href="#hero-home"
                 >
                   Интеграции
@@ -41,7 +63,7 @@ export default function Footer({ border = false }: { border?: boolean }) {
               </li>
               <li>
                 <Link
-                  className="text-gray-600 transition hover:text-gray-900"
+                  className="text-gray-600 transition hover:text-gray-900 hover:underline underline-offset-4"
                   href="#version-selector"
                 >
                   Тарифы и планы
@@ -49,7 +71,7 @@ export default function Footer({ border = false }: { border?: boolean }) {
               </li>
               <li>
                 <Link
-                  className="text-gray-600 transition hover:text-gray-900"
+                  className="text-gray-600 transition hover:text-gray-900 hover:underline underline-offset-4"
                   href="#testimonials"
                 >
                   Наш подход
@@ -59,12 +81,12 @@ export default function Footer({ border = false }: { border?: boolean }) {
           </div>
 
           {/* 3rd block (Resources) */}
-          <div className="flex flex-col h-full justify-end min-w-[180px] max-w-[240px] flex-1" >
-            <h3 className="text-sm font-medium">Ресурсы</h3>
+          <div className="flex flex-col h-full justify-end min-w-[180px] max-w-[240px] flex-1 mb-8 md:mb-0">
+            <h3 className="text-sm font-medium mb-2">Ресурсы</h3>
             <ul className="space-y-2 text-sm">
               <li>
                 <Link
-                  className="text-gray-600 transition hover:text-gray-900"
+                  className="text-gray-600 transition hover:text-gray-900 hover:underline underline-offset-4"
                   href="https://n8n.io/"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -74,7 +96,7 @@ export default function Footer({ border = false }: { border?: boolean }) {
               </li>
               <li>
                 <Link
-                  className="text-gray-600 transition hover:text-gray-900"
+                  className="text-gray-600 transition hover:text-gray-900 hover:underline underline-offset-4"
                   target="_blank"
                   rel="noopener noreferrer"
                   href="https://docs.n8n.io/?_gl=1*sr5jhd*_gcl_au*MTg3Nzg5MDI5NC4xNzQzNjA0OTY2*_ga*MTUzMjAwODcwNi4xNzQzNjA0OTY3*_ga_0SC4FF2FH9*czE3NDg1MjEyOTMkbzE5JGcwJHQxNzQ4NTIxMjkzJGo2MCRsMCRoMA.."
@@ -84,7 +106,7 @@ export default function Footer({ border = false }: { border?: boolean }) {
               </li>
               <li>
                 <Link
-                  className="text-gray-600 transition hover:text-gray-900"
+                  className="text-gray-600 transition hover:text-gray-900 hover:underline underline-offset-4"
                   href="https://n8n.io/support/"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -96,12 +118,12 @@ export default function Footer({ border = false }: { border?: boolean }) {
           </div>
 
           {/* 4th block (Social) */}
-          <div className="flex flex-col h-full justify-end min-w-[180px] max-w-[240px] flex-1" >
-            <h3 className="text-sm font-medium">Социальные сети</h3>
-            <ul className="flex gap-1">
+          <div className="flex flex-col h-full justify-end min-w-[180px] max-w-[240px] flex-1">
+            <h3 className="text-sm font-medium mb-2">Социальные сети</h3>
+            <ul className="flex gap-3 md:gap-1">
               <li>
                 <Link
-                  className="flex items-center justify-center text-blue-500 transition hover:text-blue-600"
+                  className="flex items-center justify-center text-blue-500 transition hover:text-blue-600 hover:underline underline-offset-4"
                   href="https://x.com/n8n_io"
                   aria-label="Twitter"
                   target="_blank"
@@ -118,7 +140,7 @@ export default function Footer({ border = false }: { border?: boolean }) {
               </li>
               <li>
                 <Link
-                  className="flex items-center justify-center text-blue-500 transition hover:text-blue-600"
+                  className="flex items-center justify-center text-blue-500 transition hover:text-blue-600 hover:underline underline-offset-4"
                   href="https://medium.com/data-and-beyond/part-1-introduction-to-n8n-what-it-is-and-how-it-works-74c214de769e"
                   aria-label="Medium"
                   target="_blank"
@@ -135,7 +157,7 @@ export default function Footer({ border = false }: { border?: boolean }) {
               </li>
               <li>
                 <Link
-                  className="flex items-center justify-center text-blue-500 transition hover:text-blue-600"
+                  className="flex items-center justify-center text-blue-500 transition hover:text-blue-600 hover:underline underline-offset-4"
                   href="https://github.com/n8n-io/n8n"
                   aria-label="Github"
                   target="_blank"
@@ -154,6 +176,28 @@ export default function Footer({ border = false }: { border?: boolean }) {
           </div>
         </div>
       </div>
+      <style jsx global>{`
+        @media (max-width: 768px) {
+          footer .flex-col.md\\:flex-row {
+            flex-direction: column !important;
+            gap: 2rem !important;
+          }
+          footer .flex-1 {
+            min-width: 0 !important;
+            max-width: 100% !important;
+          }
+          footer ul.flex {
+            justify-content: flex-start !important;
+            gap: 1.5rem !important;
+          }
+          footer h3 {
+            margin-bottom: 0.5rem !important;
+          }
+          footer .mb-8 {
+            margin-bottom: 1.5rem !important;
+          }
+        }
+      `}</style>
     </footer>
   );
 }
