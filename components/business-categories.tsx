@@ -373,7 +373,9 @@ export default function BusinessCategories() {
               {icons.map((icon, idx) => (
                 <div
                   key={idx}
-                  ref={el => (iconRefs.current[idx] = el)}
+                  ref={(el) => {
+                    iconRefs.current[idx] = el as HTMLDivElement | null;
+                  }}
                   className={`flex justify-center items-center p-2 sm:p-4 transition-all duration-700
                     ${visible[idx]
                       ? `animate-[bounce-scale_1000ms_ease-out_${idx * 150}ms_forwards]`
