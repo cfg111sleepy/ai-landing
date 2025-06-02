@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useRef, useEffect, useState } from "react";
 
 const Slider = dynamic(() => import("react-slick"), { ssr: false });
 
@@ -308,7 +309,7 @@ const settings = {
       settings: { 
         slidesToShow: 3,
         slidesToScroll: 1,
-        dots: true
+        dots: false
       }
     },
     {
@@ -316,7 +317,7 @@ const settings = {
       settings: { 
         slidesToShow: 2,
         slidesToScroll: 1,
-        dots: true,
+        dots: false,
         autoplay: true
       }
     },
@@ -335,20 +336,53 @@ const settings = {
 };
 
 export default function BusinessCategories() {
+  const iconRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [visible, setVisible] = useState<boolean[]>(() => icons.map(() => false));
+
+  useEffect(() => {
+    const observers: IntersectionObserver[] = [];
+    icons.forEach((_, idx) => {
+      const ref = iconRefs.current[idx];
+      if (!ref) return;
+      const observer = new window.IntersectionObserver(
+        ([entry]) => {
+          setVisible(v => {
+            const copy = [...v];
+            copy[idx] = entry.isIntersecting;
+            return copy;
+          });
+        },
+        { threshold: 0.5 }
+      );
+      observer.observe(ref);
+      observers.push(observer);
+    });
+    return () => observers.forEach(o => o.disconnect());
+  }, []);
+
   return (
-    <section className="overflow-hidden"> {/* Added overflow-hidden to prevent horizontal scrolling */}
+    <section className="overflow-hidden">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <h2 className="my-8 text-center font-bold text-xl md:text-2xl px-4">
           Интеграция с Twitter, Telegram, Reddit, Discord и другими
         </h2>
-
         <div className="pb-12 md:pb-20">
-          {/* Slider styles added for mobile optimization */}
           <div className="slider-container -mx-4 sm:mx-0">
             {/* @ts-expect-error: Slider is dynamically imported and typed as any */}
             <Slider {...settings}>
               {icons.map((icon, idx) => (
-                <div key={idx} className="flex justify-center items-center p-4">
+                <div
+                  key={idx}
+                  ref={el => (iconRefs.current[idx] = el)}
+                  className={`flex justify-center items-center p-4 transition-all duration-700
+                    ${visible[idx]
+                      ? `animate-[bounce-scale_1000ms_ease-out_${idx * 150}ms_forwards]`
+                      : ""
+                    } opacity-100 scale-100`}
+                  style={{
+                    transitionDelay: visible[idx] ? `${idx * 150}ms` : "0ms",
+                  }}
+                >
                   <div className="transform transition duration-300 hover:scale-110">
                     {icon}
                   </div>
@@ -358,28 +392,6 @@ export default function BusinessCategories() {
           </div>
         </div>
       </div>
-
-      {/* Add custom styles for mobile slider */}
-      <style jsx global>{`
-        .slider-container .slick-dots {
-          bottom: -30px;
-        }
-        .slider-container .slick-dots li button:before {
-          font-size: 8px;
-        }
-        .slider-container .slick-slide {
-          transition: all 0.3s ease;
-        }
-        @media (max-width: 640px) {
-          .slider-container .slick-dots {
-            bottom: -25px;
-          }
-          .h-16.w-16 {
-            height: 3rem;
-            width: 3rem;
-          }
-        }
-      `}</style>
     </section>
   );
 }

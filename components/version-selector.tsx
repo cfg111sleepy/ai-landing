@@ -2,7 +2,7 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
 const versions = [
 	{
@@ -111,6 +111,29 @@ const priceMapping: Record<FilterOption, string[]> = {
 
 export default function VersionSelector() {
 	const [selectedFilter, setSelectedFilter] = useState<FilterOption>("Monthly");
+	const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+	const [visible, setVisible] = useState<boolean[]>(() => versions.map(() => false));
+
+	useEffect(() => {
+		const observers: IntersectionObserver[] = [];
+		versions.forEach((_, idx) => {
+			const ref = cardRefs.current[idx];
+			if (!ref) return;
+			const observer = new window.IntersectionObserver(
+				([entry]) => {
+					setVisible(v => {
+						const copy = [...v];
+						copy[idx] = entry.isIntersecting;
+						return copy;
+					});
+				},
+				{ threshold: 0.3 }
+			);
+			observer.observe(ref);
+			observers.push(observer);
+		});
+		return () => observers.forEach(o => o.disconnect());
+	}, []);
 
 	return (
 		<section 
@@ -139,8 +162,25 @@ export default function VersionSelector() {
 			<div className="max-w-6xl mx-auto">
 				<Slider {...settings}>
 					{versions.map((v, index) => (
-						<div key={v.name} className="px-4 py-6 h-full">
-							<div className="rounded-xl shadow-lg bg-gradient-to-br from-blue-100 via-white to-blue-50 p-8 text-center h-full flex flex-col border border-blue-200 min-h-[560px] max-h-[560px] w-full transition-all duration-1000 hover:shadow-2xl hover:-translate-y-1 animate-fadeIn">
+						<div
+							key={v.name}
+							ref={el => (cardRefs.current[index] = el)}
+							className="px-4 py-6 h-full"
+						>
+							<div
+								className={`
+									rounded-xl shadow-lg bg-gradient-to-br from-blue-100 via-white to-blue-50 p-8 text-center h-full flex flex-col border border-blue-200 min-h-[560px] max-h-[560px] w-full transition-all duration-700
+									${visible[index]
+										? "opacity-100 translate-y-0"
+										: "opacity-0 translate-y-4"
+									}
+									hover:shadow-lg hover:scale-105
+								`}
+								style={{
+									transitionProperty: "opacity, transform",
+									transitionDelay: visible[index] ? `${index * 150}ms` : "0ms",
+								}}
+							>
 								<div className="flex flex-col items-center flex-1 w-full">
 									<div className="text-xl font-extrabold mb-2 text-blue-700 uppercase tracking-wide">{v.name}</div>
 									<div className="mb-3 text-gray-700 min-h-[48px] text-base font-medium">{v.details}</div>

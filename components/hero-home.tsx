@@ -11,11 +11,26 @@ import Avatar06 from "@/public/images/333.png";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { FaSearchPlus } from "react-icons/fa";
 
 export default function HeroHome() {
   const [enlargedIndex, setEnlargedIndex] = useState<number | null>(null);
+  const [inView, setInView] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  // Intersection Observer for scroll-triggered animation
+  useEffect(() => {
+    const node = sectionRef.current;
+    if (!node) return;
+    const observer = new window.IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { threshold: 0.3 }
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
   const avatars = [
     { src: Avatar01, alt: "Workflow 1" },
     { src: Avatar02, alt: "Workflow 2" },
@@ -29,25 +44,41 @@ export default function HeroHome() {
       <PageIllustration />
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         {/* Hero content */}
-        <div className="pt-32 md:pt-40">
+        <div
+          ref={sectionRef}
+          className="pt-32 md:pt-40"
+        >
           {/* Section header */}
-          <div className="pb-12 text-center md:pb-16">
+          <div
+            className={`pb-12 text-center md:pb-16 transition-all duration-1000 ${
+              inView
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-8"
+            }`}
+            style={{ transitionProperty: "opacity, transform" }}
+          >
             <h1
               className="mb-6 border-y font-bold [border-image:linear-gradient(to_right,transparent,--theme(--color-slate-300/.8),transparent)1] md:text-4xl"
-              data-aos="zoom-y-out"
-              data-aos-delay={150}
             >
               TrendPilot.AI — автономная система управления соцсетями с помощью ИИ
             </h1>
             <div className="mx-auto max-w-3xl">
               <p
                 className="mb-6 text-lg text-gray-700"
-                data-aos="zoom-y-out"
-                data-aos-delay={300}
               >
                 Оптимизирует ведение аккаунтов в X, Telegram и других соцсетях: контент, активность, анализ трендов. Подходит для личных брендов, маркетологов и фарм-аккаунтов.
               </p>
-              <div className="mx-auto max-w-2xl mb-8 animate-fade-in" data-aos="zoom-y-out" data-aos-delay={200}>
+              <div
+                className={`mx-auto max-w-2xl mb-8 transition-all duration-1000 ${
+                  inView
+                    ? "opacity-100 translate-y-0 delay-300"
+                    : "opacity-0 translate-y-8 delay-0"
+                }`}
+                style={{
+                  transitionProperty: "opacity, transform",
+                  transitionDelay: inView ? "300ms" : "0ms",
+                }}
+              >
                 <Slider
                   dots={true}
                   infinite={true}

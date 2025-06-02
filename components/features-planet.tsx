@@ -21,7 +21,7 @@ export default function FeaturesPlanet() {
               before:absolute before:inset-0 before:origin-left before:bg-gradient-to-r before:from-blue-500/20 before:to-transparent before:scale-x-0
               before:transition-transform before:duration-1200 hover:before:scale-x-100
               animate-fadeIn">
-              Ваш персональный AI-ассистент: автоматизируйте контент, управляйте аудиторией, масштабируйтесь.blocks
+              Ваш персональный AI-ассистент: автоматизируйте контент, управляйте аудиторией, масштабируйтесь.
             </h2>
           </div>
           {/* Planet */}
