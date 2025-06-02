@@ -2,6 +2,7 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { useState } from "react";
 
 const versions = [
 	{
@@ -99,39 +100,119 @@ function CustomArrow({ direction, currentSlide, slideCount, ...props }: { direct
 	);
 }
 
+const filterOptions = ["Monthly", "6 Months", "Yearly"] as const;
+type FilterOption = typeof filterOptions[number];
+
+const priceMapping: Record<FilterOption, string[]> = {
+	Monthly: ["0₽", "499₽/мес", "1990₽/мес", "4990₽/мес"],
+	"6 Months": ["0₽", "2994₽", "11940₽", "29940₽"],
+	Yearly: ["0₽", "4990₽", "19900₽", "49900₽"],
+};
+
 export default function VersionSelector() {
+	const [selectedFilter, setSelectedFilter] = useState<FilterOption>("Monthly");
+
 	return (
-		<section id="version-selector" className="my-8">
+		<section 
+			id="version-selector"
+			className="my-8"
+			// data-aos="fade-down"
+            // data-aos-duration="1500"
+            // data-aos-delay="100"
+		>
 			<h3 className="text-center text-2xl font-bold mb-4">Выберите версию:</h3>
+			<div className="flex justify-center mb-6">
+				{filterOptions.map((option) => (
+					<button
+						key={option}
+						onClick={() => setSelectedFilter(option)}
+						className={`px-4 py-2 mx-2 rounded-full border transition-all duration-300 ${
+							selectedFilter === option
+								? "bg-blue-600 text-white border-blue-600"
+								: "bg-white text-blue-600 border-blue-600 hover:bg-blue-100"
+						}`}
+					>
+						{option}
+					</button>
+				))}
+			</div>
 			<div className="max-w-6xl mx-auto">
 				<Slider {...settings}>
-					{versions.map((v) => (
+					{versions.map((v, index) => (
 						<div key={v.name} className="px-4 py-6 h-full">
-							<div className="rounded-xl shadow-lg bg-gradient-to-br from-blue-100 via-white to-blue-50 p-8 text-center h-full flex flex-col border border-blue-200 min-h-[560px] max-h-[560px] w-full">
+							<div className="rounded-xl shadow-lg bg-gradient-to-br from-blue-100 via-white to-blue-50 p-8 text-center h-full flex flex-col border border-blue-200 min-h-[560px] max-h-[560px] w-full transition-all duration-1000 hover:shadow-2xl hover:-translate-y-1 animate-fadeIn">
 								<div className="flex flex-col items-center flex-1 w-full">
 									<div className="text-xl font-extrabold mb-2 text-blue-700 uppercase tracking-wide">{v.name}</div>
 									<div className="mb-3 text-gray-700 min-h-[48px] text-base font-medium">{v.details}</div>
 									<ul className="text-left mt-2 mb-2 space-y-1 text-sm w-full max-w-md mx-auto">
 										{v.points && v.points.map((point, idx) => (
 											<li key={idx} className="flex items-center gap-2 py-1 px-2 rounded-md bg-blue-50 w-full">
-												{point.includes('✅') ? (
+												{point.includes("✅") ? (
 													<span className="text-green-500 font-bold">✔</span>
-												) : point.includes('❌') ? (
+												) : point.includes("❌") ? (
 													<span className="text-red-400 font-bold">✖</span>
 												) : null}
-												<span className="text-gray-800 break-words">{point.replace('✅', '').replace('❌', '')}</span>
+												<span className="text-gray-800 break-words">{point.replace("✅", "").replace("❌", "")}</span>
 											</li>
 										))}
 									</ul>
 								</div>
 								<div className="flex items-center justify-center w-full mt-6 mb-0 pt-2 border-t border-blue-200">
-									<span className="inline-block bg-blue-600 text-white text-2xl font-extrabold rounded-lg px-8 py-3 shadow-md border border-blue-600">{v.price}</span>
+									<span className="inline-block bg-blue-600 text-white text-2xl font-extrabold rounded-lg px-8 py-3 shadow-md border border-blue-600">
+										{priceMapping[selectedFilter][index]}
+									</span>
 								</div>
 							</div>
 						</div>
 					))}
 				</Slider>
 			</div>
+			
+			{/* Add animation keyframes */}
+			<style jsx global>{`
+				@keyframes fadeIn {
+					from {
+						opacity: 0;
+						transform: translateY(20px);
+					}
+					to {
+						opacity: 1;
+						transform: translateY(0);
+					}
+				}
+
+				.animate-fadeIn {
+					animation: fadeIn 1s ease-out forwards;
+				}
+
+				/* Add stagger effect for cards */
+				.slick-slide:nth-child(1) .animate-fadeIn {
+					animation-delay: 0s;
+				}
+				.slick-slide:nth-child(2) .animate-fadeIn {
+					animation-delay: 0.2s;
+				}
+				.slick-slide:nth-child(3) .animate-fadeIn {
+					animation-delay: 0.4s;
+				}
+				.slick-slide:nth-child(4) .animate-fadeIn {
+					animation-delay: 0.6s;
+				}
+
+				/* Add hover animation */
+				.slick-slide {
+					perspective: 1000px;
+				}
+				
+				.slick-slide > div {
+					transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+				}
+
+				/* Smooth price change animation */
+				.bg-blue-600 {
+					transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+				}
+			`}</style>
 		</section>
 	);
 }

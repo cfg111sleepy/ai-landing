@@ -9,7 +9,7 @@ export default function InstallBlock() {
   return (
     <>
     <section className="relative before:absolute before:inset-0 before:-z-20 before:bg-gray-900">
-      <div className="mx-auto mb-8 max-w-3xl before:bg-gray-900">
+      <div data-aos="zoom-y-out" data-aos-delay={600} className="mx-auto mb-8 max-w-3xl before:bg-gray-900">
         <h2 className="mb-2 text-center text-2xl font-semibold text-gray-900 dark:text-white">
           Установка и запуск — проще не бывает
         </h2>

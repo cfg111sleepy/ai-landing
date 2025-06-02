@@ -10,56 +10,64 @@ export default function FeaturesPlanet() {
   return (
     <section id="features-planet" className="relative before:absolute before:inset-0 before:-z-20 before:bg-gray-900">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="py-12 md:py-20">
+        <div className="py-8 sm:py-12 md:py-20">
           {/* Section header */}
-          <div className="mx-auto max-w-3xl pb-16 text-center md:pb-20">
-            <h2 className="text-xl font-bold text-gray-200 md:text-4xl">
-              Ваш персональный AI-ассистент: автоматизируйте контент, управляйте аудиторией, масштабируйтесь.
+          <div className="mx-auto max-w-3xl pb-8 sm:pb-12 text-center md:pb-20" 
+            data-aos="fade-down"
+            data-aos-duration="1500"
+            data-aos-delay="100"
+            data-aos-once="true">
+            <h2 className="text-lg sm:text-xl font-bold text-gray-200 md:text-4xl px-4 relative
+              before:absolute before:inset-0 before:origin-left before:bg-gradient-to-r before:from-blue-500/20 before:to-transparent before:scale-x-0
+              before:transition-transform before:duration-1200 hover:before:scale-x-100
+              animate-fadeIn">
+              Ваш персональный AI-ассистент: автоматизируйте контент, управляйте аудиторией, масштабируйтесь.blocks
             </h2>
           </div>
           {/* Planet */}
-          <div className="pb-16 md:pb-20" data-aos="zoom-y-out">
+          <div className="pb-8 sm:pb-12 md:pb-20" data-aos="zoom-y-out" data-aos-duration="1500">
             <div className="text-center">
-              <div className="relative inline-flex rounded-full before:absolute before:inset-0 before:-z-10 before:scale-[.85] before:animate-[pulse_4s_cubic-bezier(.4,0,.6,1)_infinite] before:bg-linear-to-b before:from-blue-900 before:to-sky-700/50 before:blur-3xl after:absolute after:inset-0 after:rounded-[inherit] after:[background:radial-gradient(closest-side,var(--color-blue-500),transparent)]">
+              <div className="relative inline-flex rounded-full before:absolute before:inset-0 before:-z-10 before:scale-[1] before:animate-[pulse_4.5s_cubic-bezier(.4,0,.6,1)_infinite] before:bg-linear-to-b before:from-blue-900 before:to-sky-700/50 before:blur-3xl after:absolute after:inset-0 after:rounded-[inherit] after:[background:radial-gradient(closest-side,var(--color-blue-500),transparent)]">
                 <Image
-                  className="rounded-full bg-gray-900"
+                  className="rounded-full bg-gray-900 w-[280px] sm:w-[320px] md:w-[400px] h-auto"
                   src={PlanetImg}
                   width={400}
                   height={400}
                   alt="Planet"
+                  priority
                 />
                 <div className="pointer-events-none" aria-hidden="true">
                   <Image
-                    className="absolute -right-64 -top-20 z-10 max-w-none"
+                    className="absolute -right-32 sm:-right-48 md:-right-64 -top-10 sm:-top-16 md:-top-20 z-10 max-w-none hidden sm:block"
                     src={PlanetOverlayImg}
                     width={789}
                     height={755}
                     alt="Planet decoration"
                   />
-                  <div>
+                  <div className="hidden sm:block">
                       <Image
-                        className="absolute -left-28 top-16 z-10 animate-[float_4s_ease-in-out_infinite_both] opacity-80 transition-opacity duration-500"
+                        className="absolute -left-16 sm:-left-20 md:-left-28 top-8 sm:top-12 md:top-16 z-10 animate-[float_4.5s_ease-in-out_infinite_both] opacity-80 transition-opacity duration-1000 w-[160px] sm:w-[200px] md:w-[253px]"
                         src={PlanetTagImg01}
                         width={253}
                         height={56}
                         alt="Tag 01"
                       />
                       <Image
-                        className="absolute left-56 top-7 z-10 animate-[float_4s_ease-in-out_infinite_1s_both] opacity-30 transition-opacity duration-500"
+                        className="absolute left-32 sm:left-44 md:left-56 top-4 sm:top-6 md:top-7 z-10 animate-[float_4.5s_ease-in-out_infinite_1s_both] opacity-30 transition-opacity duration-1000 w-[140px] sm:w-[180px] md:w-[241px]"
                         src={PlanetTagImg02}
                         width={241}
                         height={56}
                         alt="Tag 02"
                       />
                       <Image
-                        className="absolute -left-20 bottom-24 z-10 animate-[float_4s_ease-in-out_infinite_2s_both] opacity-25 transition-opacity duration-500"
+                        className="absolute -left-12 sm:-left-16 md:-left-20 bottom-16 sm:bottom-20 md:bottom-24 z-10 animate-[float_4.5s_ease-in-out_infinite_2s_both] opacity-25 transition-opacity duration-1000 w-[140px] sm:w-[180px] md:w-[243px]"
                         src={PlanetTagImg03}
                         width={243}
                         height={56}
                         alt="Tag 03"
                       />
                       <Image
-                        className="absolute bottom-32 left-64 z-10 animate-[float_4s_ease-in-out_infinite_3s_both] opacity-80 transition-opacity duration-500"
+                        className="absolute bottom-20 sm:bottom-24 md:bottom-32 left-36 sm:left-48 md:left-64 z-10 animate-[float_4.5s_ease-in-out_infinite_3s_both] opacity-80 transition-opacity duration-1000 w-[150px] sm:w-[190px] md:w-[251px]"
                         src={PlanetTagImg04}
                         width={251}
                         height={56}
@@ -71,11 +79,17 @@ export default function FeaturesPlanet() {
             </div>
           </div>
           {/* Grid */}
-          <div className="grid overflow-hidden sm:grid-cols-2 lg:grid-cols-3 *:relative *:p-6 *:before:absolute *:before:bg-gray-800 *:before:[block-size:100vh] *:before:[inline-size:1px] *:before:[inset-block-start:0] *:before:[inset-inline-start:-1px] *:after:absolute *:after:bg-gray-800 *:after:[block-size:1px] *:after:[inline-size:100vw] *:after:[inset-block-start:-1px] *:after:[inset-inline-start:0] md:*:p-10">
-            <article>
-              <h3 className="mb-2 flex items-center space-x-2 font-medium text-gray-200">
+          <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 overflow-hidden">
+            <article className="group bg-gray-800/5 rounded-lg p-4 sm:p-6 md:p-8 hover:bg-gray-800/10 transition-all duration-1000 relative 
+              before:absolute before:inset-0 before:rounded-lg before:border before:border-gray-700 before:transition-all before:duration-1000
+              hover:before:border-blue-500/50 hover:before:scale-105 hover:transform hover:scale-[1.02]
+              hover:shadow-[0_0_25px_-5px_rgba(59,130,246,0.1)]" 
+              data-aos="fade-up" 
+              data-aos-duration="1500"
+              data-aos-delay="0">
+              <h3 className="mb-3 flex items-center gap-2 font-medium text-gray-200 text-base sm:text-lg group-hover:text-blue-400 transition-colors duration-300">
                 <svg
-                  className="fill-blue-500"
+                  className="fill-blue-500 transform group-hover:scale-110 transition-transform duration-300"
                   xmlns="http://www.w3.org/2000/svg"
                   width={16}
                   height={16}
@@ -84,13 +98,19 @@ export default function FeaturesPlanet() {
                 </svg>
                 <span>Больше времени на главное</span>
               </h3>
-              <p className="text-[15px] text-gray-400">
+              <p className="text-sm sm:text-[15px] text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors duration-300">
                 Выгорание, дедлайны, пустые экраны — с этим сталкиваются все, кто работает с контентом. Мы предлагаем решение: один инструмент, который берёт рутину на себя.              </p>
             </article>
-            <article>
-              <h3 className="mb-2 flex items-center space-x-2 font-medium text-gray-200">
+            <article className="group bg-gray-800/5 rounded-lg p-4 sm:p-6 md:p-8 hover:bg-gray-800/10 transition-all duration-1000 relative 
+              before:absolute before:inset-0 before:rounded-lg before:border before:border-gray-700 before:transition-all before:duration-1000
+              hover:before:border-blue-500/50 hover:before:scale-105 hover:transform hover:scale-[1.02]
+              hover:shadow-[0_0_25px_-5px_rgba(59,130,246,0.1)]" 
+              data-aos="fade-up" 
+              data-aos-duration="1500"
+              data-aos-delay="100">
+              <h3 className="mb-3 flex items-center gap-2 font-medium text-gray-200 text-base sm:text-lg group-hover:text-blue-400 transition-colors duration-300">
                 <svg
-                  className="fill-blue-500"
+                  className="fill-blue-500 transform group-hover:scale-110 transition-transform duration-300"
                   xmlns="http://www.w3.org/2000/svg"
                   width={16}
                   height={16}
@@ -99,14 +119,20 @@ export default function FeaturesPlanet() {
                 </svg>
                 <span>AI пишет за вас</span>
               </h3>
-              <p className="text-[15px] text-gray-400">
+              <p className="text-sm sm:text-[15px] text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors duration-300">
                 Генерация постов под ваши темы, стиль и формат. Не тратьте часы на написание — пусть нейросеть сделает черновик, а вы добавите финальный штрих.
               </p>
             </article>
-            <article>
-              <h3 className="mb-2 flex items-center space-x-2 font-medium text-gray-200">
+            <article className="group bg-gray-800/5 rounded-lg p-4 sm:p-6 md:p-8 hover:bg-gray-800/10 transition-all duration-1000 relative 
+              before:absolute before:inset-0 before:rounded-lg before:border before:border-gray-700 before:transition-all before:duration-1000
+              hover:before:border-blue-500/50 hover:before:scale-105 hover:transform hover:scale-[1.02]
+              hover:shadow-[0_0_25px_-5px_rgba(59,130,246,0.1)]" 
+              data-aos="fade-up" 
+              data-aos-duration="1500"
+              data-aos-delay="200">
+              <h3 className="mb-3 flex items-center gap-2 font-medium text-gray-200 text-base sm:text-lg group-hover:text-blue-400 transition-colors duration-300">
                 <svg
-                  className="fill-blue-500"
+                  className="fill-blue-500 transform group-hover:scale-110 transition-transform duration-300"
                   xmlns="http://www.w3.org/2000/svg"
                   width={16}
                   height={16}
@@ -119,14 +145,20 @@ export default function FeaturesPlanet() {
                 </svg>
                 <span>Умный календарь публикаций</span>
               </h3>
-              <p className="text-[15px] text-gray-400">
+              <p className="text-sm sm:text-[15px] text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors duration-300">
                 Планируйте неделю вперёд — или публикуйте сразу. Автоматическая публикация в Telegram и Twitter по расписанию, даже когда вы офлайн.
               </p>
             </article>
-            <article>
-              <h3 className="mb-2 flex items-center space-x-2 font-medium text-gray-200">
+            <article className="group bg-gray-800/5 rounded-lg p-4 sm:p-6 md:p-8 hover:bg-gray-800/10 transition-all duration-1000 relative 
+              before:absolute before:inset-0 before:rounded-lg before:border before:border-gray-700 before:transition-all before:duration-1000
+              hover:before:border-blue-500/50 hover:before:scale-105 hover:transform hover:scale-[1.02]
+              hover:shadow-[0_0_25px_-5px_rgba(59,130,246,0.1)]" 
+              data-aos="fade-up" 
+              data-aos-duration="1500"
+              data-aos-delay="300">
+              <h3 className="mb-3 flex items-center gap-2 font-medium text-gray-200 text-base sm:text-lg group-hover:text-blue-400 transition-colors duration-300">
                 <svg
-                  className="fill-blue-500"
+                  className="fill-blue-500 transform group-hover:scale-110 transition-transform duration-300"
                   xmlns="http://www.w3.org/2000/svg"
                   width={16}
                   height={16}
@@ -135,14 +167,20 @@ export default function FeaturesPlanet() {
                 </svg>
                 <span>Тренды и идеи каждый день</span>
               </h3>
-              <p className="text-[15px] text-gray-400">
+              <p className="text-sm sm:text-[15px] text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors duration-300">
                 Что обсуждают конкуренты? Какие темы на пике? Система подскажет вам, когда и о чём стоит говорить, чтобы быть вовремя и в контексте.
               </p>
             </article>
-            <article>
-              <h3 className="mb-2 flex items-center space-x-2 font-medium text-gray-200">
+            <article className="group bg-gray-800/5 rounded-lg p-4 sm:p-6 md:p-8 hover:bg-gray-800/10 transition-all duration-1000 relative 
+              before:absolute before:inset-0 before:rounded-lg before:border before:border-gray-700 before:transition-all before:duration-1000
+              hover:before:border-blue-500/50 hover:before:scale-105 hover:transform hover:scale-[1.02]
+              hover:shadow-[0_0_25px_-5px_rgba(59,130,246,0.1)]" 
+              data-aos="fade-up" 
+              data-aos-duration="1500"
+              data-aos-delay="400">
+              <h3 className="mb-3 flex items-center gap-2 font-medium text-gray-200 text-base sm:text-lg group-hover:text-blue-400 transition-colors duration-300">
                 <svg
-                  className="fill-blue-500"
+                  className="fill-blue-500 transform group-hover:scale-110 transition-transform duration-300"
                   xmlns="http://www.w3.org/2000/svg"
                   width={16}
                   height={16}
@@ -151,14 +189,20 @@ export default function FeaturesPlanet() {
                 </svg>
                 <span>Все каналы вместе</span>
               </h3>
-              <p className="text-[15px] text-gray-400">
+              <p className="text-sm sm:text-[15px] text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors duration-300">
                 Один интерфейс — все ваши соцсети. Постите на нескольких языках, управляйте командами, отслеживайте эффективность — без хаоса в Excel и чатов.
               </p>
             </article>
-            <article>
-              <h3 className="mb-2 flex items-center space-x-2 font-medium text-gray-200">
+            <article className="group bg-gray-800/5 rounded-lg p-4 sm:p-6 md:p-8 hover:bg-gray-800/10 transition-all duration-1000 relative 
+              before:absolute before:inset-0 before:rounded-lg before:border before:border-gray-700 before:transition-all before:duration-1000
+              hover:before:border-blue-500/50 hover:before:scale-105 hover:transform hover:scale-[1.02]
+              hover:shadow-[0_0_25px_-5px_rgba(59,130,246,0.1)]" 
+              data-aos="fade-up" 
+              data-aos-duration="1500"
+              data-aos-delay="500">
+              <h3 className="mb-3 flex items-center gap-2 font-medium text-gray-200 text-base sm:text-lg group-hover:text-blue-400 transition-colors duration-300">
                 <svg
-                  className="fill-blue-500"
+                  className="fill-blue-500 transform group-hover:scale-110 transition-transform duration-300"
                   xmlns="http://www.w3.org/2000/svg"
                   width={16}
                   height={16}   
@@ -167,7 +211,7 @@ export default function FeaturesPlanet() {
                 </svg>
                 <span>Интеграции и сценарии на n8n</span>
               </h3>
-              <p className="text-[15px] text-gray-400">
+              <p className="text-sm sm:text-[15px] text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors duration-300">
                 Работает поверх мощной автоматизации: подключите свои источники данных, CRM, Google Sheets, AI-модели и создайте свой уникальный контур.
               </p>
             </article>

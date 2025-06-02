@@ -11,9 +11,6 @@ import Avatar06 from "@/public/images/333.png";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Workflow01 from "@/public/images/workflow-01.png";
-import Workflow02 from "@/public/images/workflow-02.png";
-import Workflow03 from "@/public/images/workflow-03.png";
 import { useState } from "react";
 import { FaSearchPlus } from "react-icons/fa";
 

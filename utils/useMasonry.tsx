@@ -3,6 +3,31 @@ import { useEffect, useState, useRef } from "react";
 const useMasonry = () => {
   const masonryContainer = useRef<HTMLDivElement | null>(null);
   const [items, setItems] = useState<ChildNode[]>([]);
+  const [columns, setColumns] = useState(1);
+
+  useEffect(() => {
+    const updateColumns = () => {
+      if (window.innerWidth >= 1024) {
+        setColumns(3);
+      } else if (window.innerWidth >= 640) {
+        setColumns(2);
+      } else {
+        setColumns(1);
+      }
+    };
+
+    updateColumns();
+    window.addEventListener("resize", updateColumns);
+    return () => {
+      window.removeEventListener("resize", updateColumns);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (masonryContainer.current) {
+      masonryContainer.current.style.gridTemplateColumns = `repeat(${columns}, 1fr)`;
+    }
+  }, [columns]);
 
   useEffect(() => {
     if (masonryContainer.current) {
