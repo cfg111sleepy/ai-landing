@@ -267,7 +267,9 @@ export default function Testimonials() {
               {testimonials.map((testimonial, index) => (
                 <div
                   key={index}
-                  ref={el => (cardRefs.current[index] = el)}
+                  ref={el => {
+                    cardRefs.current[index] = el as HTMLDivElement | null;
+                  }}
                   className={`
                     group transition-all duration-700
                     ${visible[index] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}
