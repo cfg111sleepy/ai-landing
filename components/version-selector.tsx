@@ -164,7 +164,9 @@ export default function VersionSelector() {
 					{versions.map((v, index) => (
 						<div
 							key={v.name}
-							ref={el => (cardRefs.current[index] = el)}
+							ref={el => {
+								cardRefs.current[index] = el as HTMLDivElement | null;
+							}}
 							className="px-4 py-6 h-full"
 						>
 							<div
