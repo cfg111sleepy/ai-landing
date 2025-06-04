@@ -285,7 +285,7 @@ const settings = {
   arrows: false,
   swipeToSlide: true, // Enable smooth touch swiping
   autoplay: true, // Enable autoplay
-  autoplaySpeed: 3000, // 3 seconds per slide
+  autoplaySpeed: 1500, // 3 seconds per slide
   pauseOnHover: true, // Pause on hover
   responsive: [
     {

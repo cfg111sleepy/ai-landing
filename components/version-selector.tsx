@@ -10,7 +10,6 @@ const versions = [
 		details: "Базовые функции. Ограниченная поддержка. Для личного пользования. Доступ 3 часа.",
 		price: "0₽",
 		points: [
-			"1 аккаунт",
 			"Постинг по трендам ❌",
 			"Автокомментинг ❌",
 			"Поддержка в Telegram ❌",
@@ -25,7 +24,6 @@ const versions = [
 		details: "До 3 каналов. Расширенные функции. Поддержка email. Для малого бизнеса.",
 		price: "499₽/мес",
 		points: [
-			"1 аккаунт",
 			"Постинг по трендам ✅",
 			"Автокомментинг ✅",
 			"Поддержка в Telegram ✅",
@@ -40,7 +38,6 @@ const versions = [
 		details: "До 10 каналов. Все функции. Приоритетная поддержка. Для агентств и команд.",
 		price: "1990₽/мес",
 		points: [
-			"до 5 аккаунтов",
 			"Постинг по трендам ✅",
 			"Автокомментинг ✅",
 			"Поддержка в Telegram ✅",
@@ -55,7 +52,6 @@ const versions = [
 		details: "Неограниченно каналов. API-доступ. Персональный менеджер.",
 		price: "4990₽/мес",
 		points: [
-			"10+ аккаунтов (до 100)",
 			"Постинг по трендам ✅",
 			"Автокомментинг ✅",
 			"Поддержка в Telegram ✅",
@@ -114,6 +110,10 @@ export default function VersionSelector() {
 	const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
 	const [visible, setVisible] = useState<boolean[]>(() => versions.map(() => false));
 
+	// New: State for filters
+	const [socialAccounts, setSocialAccounts] = useState(4);
+	const [additionalMembers, setAdditionalMembers] = useState(7);
+
 	useEffect(() => {
 		const observers: IntersectionObserver[] = [];
 		versions.forEach((_, idx) => {
@@ -135,15 +135,29 @@ export default function VersionSelector() {
 		return () => observers.forEach(o => o.disconnect());
 	}, []);
 
+	// New: Price calculation logic
+	const getPrice = (plan: string, index: number) => {
+		if (plan === "Farm") return "Custom";
+		// Example: price increases by 100₽ per social account and 50₽ per member for demonstration
+		const basePrice = priceMapping[selectedFilter][index];
+		if (plan === "Free") return basePrice;
+		let priceNum = 0;
+		if (basePrice.includes("₽")) {
+			priceNum = parseInt(basePrice.replace(/[^\d]/g, ""));
+		}
+		const extra = (socialAccounts - 4) * 100 + (additionalMembers - 7) * 50;
+		const final = Math.max(priceNum + extra, 0);
+		return basePrice.includes("/мес") ? `${final}₽/мес` : `${final}₽`;
+	};
+
 	return (
 		<section 
 			id="version-selector"
 			className="my-8"
-			// data-aos="fade-down"
-            // data-aos-duration="1500"
-            // data-aos-delay="100"
 		>
 			<h3 className="text-center text-2xl font-bold mb-4">Выберите версию:</h3>
+
+
 			<div className="flex justify-center mb-6">
 				{filterOptions.map((option) => (
 					<button
@@ -159,6 +173,27 @@ export default function VersionSelector() {
 					</button>
 				))}
 			</div>
+
+{/* New: Filters */}
+			<div className="flex justify-center gap-8 mb-6">
+				<div className="flex flex-col items-center">
+					<span className="font-semibold mb-1 flex items-center gap-1">Социальные сети <span className="text-xs text-blue-700" title="Number of social accounts you want to manage"></span></span>
+					<div className="flex items-center border rounded-lg px-3 py-2 bg-white">
+						<button onClick={() => setSocialAccounts(v => Math.max(1, v - 1))} className="w-7 h-7 flex items-center justify-center text-lg font-bold text-blue-600 border rounded bg-gray-50 hover:bg-gray-100">-</button>
+						<span className="mx-4 w-6 text-center font-bold">{socialAccounts}</span>
+						<button onClick={() => setSocialAccounts(v => Math.min(100, v + 1))} className="w-7 h-7 flex items-center justify-center text-lg font-bold text-blue-600 border rounded bg-gray-50 hover:bg-gray-100">+</button>
+					</div>
+				</div>
+				<div className="flex flex-col items-center">
+					<span className="font-semibold mb-1 flex items-center gap-1">Дополнительные участники <span className="text-xs text-blue-700" title="Number of additional team members"></span></span>
+					<div className="flex items-center border rounded-lg px-3 py-2 bg-white">
+						<button onClick={() => setAdditionalMembers(v => Math.max(1, v - 1))} className="w-7 h-7 flex items-center justify-center text-lg font-bold text-blue-600 border rounded bg-gray-50 hover:bg-gray-100">-</button>
+						<span className="mx-4 w-6 text-center font-bold">{additionalMembers}</span>
+						<button onClick={() => setAdditionalMembers(v => Math.min(100, v + 1))} className="w-7 h-7 flex items-center justify-center text-lg font-bold text-blue-600 border rounded bg-gray-50 hover:bg-gray-100">+</button>
+					</div>
+				</div>
+			</div>
+
 			<div className="max-w-6xl mx-auto">
 				<Slider {...settings}>
 					{versions.map((v, index) => (
@@ -183,7 +218,7 @@ export default function VersionSelector() {
 									transitionDelay: visible[index] ? `${index * 150}ms` : "0ms",
 								}}
 							>
-								<div className="flex flex-col items-center flex-1 w-full">
+								<div className="flex flex-col justify-between items-center flex-1 w-full">
 									<div className="text-xl font-extrabold mb-2 text-blue-700 uppercase tracking-wide">{v.name}</div>
 									<div className="mb-3 text-gray-700 min-h-[48px] text-base font-medium">{v.details}</div>
 									<ul className="text-left mt-2 mb-2 space-y-1 text-sm w-full max-w-md mx-auto">
@@ -201,7 +236,7 @@ export default function VersionSelector() {
 								</div>
 								<div className="flex items-center justify-center w-full mt-6 mb-0 pt-2 border-t border-blue-200">
 									<span className="inline-block bg-blue-600 text-white text-2xl font-extrabold rounded-lg px-8 py-3 shadow-md border border-blue-600">
-										{priceMapping[selectedFilter][index]}
+										{getPrice(v.name, index)}
 									</span>
 								</div>
 							</div>
