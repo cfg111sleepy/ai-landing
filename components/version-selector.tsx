@@ -84,15 +84,15 @@ function CustomArrow({ direction, currentSlide, slideCount, ...props }: { direct
 		<button
 			{...props}
 			type="button"
-			className={`slick-arrow slick-arrow-${direction} z-999 flex items-center justify-center bg-white border-2 border-blue-500 rounded-full w-14 h-14 shadow-xl absolute top-1/2 -translate-y-1/2 transition-all duration-200 hover:bg-blue-600 group focus:outline-none focus:ring-2 focus:ring-blue-400
-				${direction === 'next' ? 'right-0 md:-right-8 mr-2 md:mr-4' : 'left-0 md:-left-8 ml-2 md:ml-4'}`}
+			className={`slick-arrow slick-arrow-${direction} z-999 flex items-center justify-center bg-white border-2 border-blue-500 rounded-full w-10 h-10 shadow-xl absolute top-1/2 -translate-y-1/2 transition-all duration-200 hover:bg-blue-600 group focus:outline-none focus:ring-2 focus:ring-blue-400
+				${direction === 'next' ? 'right-4 md:right-0 mr-2 md:mr-4' : 'left-4 md:left-0 ml-2 md:ml-4'}`}
 			style={{ position: 'absolute' }}
 			aria-label={direction === 'next' ? 'Следующий' : 'Предыдущий'}
 		>
 			{direction === 'next' ? (
-				<svg width="32" height="32" fill="none" viewBox="0 0 32 32" className="transition-colors duration-200 group-hover:stroke-white stroke-blue-600" strokeWidth="3"><path strokeLinecap="round" strokeLinejoin="round" d="M12 24l8-8-8-8"/></svg>
+				<svg width="24" height="24" fill="none" viewBox="0 0 32 32" className="transition-colors duration-200 group-hover:stroke-white stroke-blue-600" strokeWidth="3"><path strokeLinecap="round" strokeLinejoin="round" d="M12 24l8-8-8-8"/></svg>
 			) : (
-				<svg width="32" height="32" fill="none" viewBox="0 0 32 32" className="transition-colors duration-200 group-hover:stroke-white stroke-blue-600" strokeWidth="3"><path strokeLinecap="round" strokeLinejoin="round" d="M20 8l-8 8 8 8"/></svg>
+				<svg width="24" height="24" fill="none" viewBox="0 0 32 32" className="transition-colors duration-200 group-hover:stroke-white stroke-blue-600" strokeWidth="3"><path strokeLinecap="round" strokeLinejoin="round" d="M20 8l-8 8 8 8"/></svg>
 			)}
 		</button>
 	);
