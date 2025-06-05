@@ -19,7 +19,7 @@ export default function Home() {
       <BusinessCategories />
       <FeaturesPlanet />
       <Workflows />
-      <div className="mb-8 max-w-6xl mx-auto">
+      <div className="mx-auto">
         <TerminalInstallN8N />
       </div>
       <Testimonials />

@@ -10,7 +10,7 @@ export default function Header() {
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="relative flex h-14 items-center justify-between gap-3 rounded-2xl bg-white/90 px-3 shadow-lg shadow-black/[0.03] backdrop-blur-xs before:pointer-events-none before:absolute before:inset-0 before:rounded-[inherit] before:border before:border-transparent before:[background:linear-gradient(var(--color-gray-100),var(--color-gray-200))_border-box] before:[mask-composite:exclude_!important] before:[mask:linear-gradient(white_0_0)_padding-box,_linear-gradient(white_0_0)]">
           {/* Site branding and name */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 ml-3">
             <Link href="/" className="flex items-center gap-3 group" aria-label="Cruip">
               <Logo />
               <span className="font-extrabold text-lg md:text-xl group-hover:underline">
@@ -32,18 +32,7 @@ export default function Header() {
               <li>
                 <span className="text-gray-300 select-none">|</span>
               </li>
-              <li>
-                <Link
-                  className="text-gray-600 transition hover:text-gray-900 hover:underline underline-offset-4"
-                  href="#install-block"
-                >
-                  Установка
-                </Link>
-              </li>
-              <li>
-                <span className="text-gray-300 select-none">|</span>
-              </li>
-              <li>
+              <li className="mr-3">
                 <Link
                   className="text-gray-600 transition hover:text-gray-900 hover:underline underline-offset-4"
                   href="/plans"

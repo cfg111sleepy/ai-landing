@@ -6,228 +6,112 @@ import WorflowImg02 from "@/public/images/workflow-02.png";
 import WorflowImg03 from "@/public/images/workflow-03.png";
 import Spotlight from "@/components/spotlight";
 import Avatar04 from "@/public/images/face.png";
-import { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 
 export default function Workflows() {
-  const [animate, setAnimate] = useState(false);
-  const imgRef = useRef<HTMLDivElement | null>(null);
-  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const [imgInView, setImgInView] = useState(false);
-  const [cardInView, setCardInView] = useState([false, false, false]);
-
+  const [show, setShow] = useState(false);
   useEffect(() => {
-    setAnimate(true);
+    setShow(true);
   }, []);
-
-  // Animate image on scroll in/out
-  useEffect(() => {
-    let imgObs: IntersectionObserver | undefined;
-    if (imgRef.current) {
-      imgObs = new window.IntersectionObserver(
-        ([entry]) => setImgInView(entry.isIntersecting),
-        { threshold: 0.4 }
-      );
-      imgObs.observe(imgRef.current);
-    }
-    // Animate cards on scroll in/out
-    const cardObs: IntersectionObserver[] = [];
-    cardRefs.current.forEach((ref, idx) => {
-      if (!ref) return;
-      const obs = new window.IntersectionObserver(
-        ([entry]) =>
-          setCardInView((v) => {
-            const copy = [...v];
-            copy[idx] = entry.isIntersecting;
-            return copy;
-          }),
-        { threshold: 0.4 }
-      );
-      obs.observe(ref);
-      cardObs.push(obs);
-    });
-    return () => {
-      imgObs?.disconnect();
-      cardObs.forEach((o) => o.disconnect());
-    };
-  }, []);
-
   return (
     <section
       id="install-block"
-      className={`relative before:absolute before:inset-0 before:-z-20 before:bg-gray-900 transition-opacity duration-1000 ${
-        animate ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-      }`}
+      className={`relative py-16 bg-gradient-to-br from-[#f8fafc] via-[#e0e7ef] to-[#f1f5f9] dark:from-gray-900 dark:via-gray-950 dark:to-gray-900 overflow-hidden ${show ? 'animate-fadeIn' : 'opacity-0 translate-y-8'}`}
     >
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 transition-all duration-1000" style={{ transitionProperty: "opacity, transform" }}>
-        <div className={`pb-12 md:pb-20 pt-12 transition-all duration-1000 ${animate ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`} style={{ transitionProperty: "opacity, transform" }}>
-          {/* Section header */}
-          <div className="mx-auto max-w-3xl pb-12 text-center md:pb-20">
-            <h2 className="animate-[gradient_6s_linear_infinite] bg-[linear-gradient(to_right,var(--color-gray-200),var(--color-indigo-200),var(--color-gray-50),var(--color-indigo-300),var(--color-gray-200))] bg-[length:200%_auto] bg-clip-text pb-4 font-nacelle text-3xl font-semibold text-transparent md:text-4xl">
-              Установка и запуск — проще не бывает
-            </h2>
-            <p className="text-mg text-indigo-200/65">
-              Работает в терминале, браузере и как десктопное приложение. Выбирайте удобный способ.
-            </p>
-            <div
-              ref={imgRef}
-              className={`m-10 flex justify-center transition-all duration-700 ${
-                imgInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-              }`}
-              style={{ transitionProperty: "opacity, transform" }}
-            >
-              <button
-                type="button"
-                className="focus:outline-none transition-transform duration-200 hover:scale-105"
-                onClick={() => {
-                  const modal = document.getElementById("zoom-modal");
-                  if (modal) modal.style.display = "flex";
-                }}
-                aria-label="Увеличить изображение"
-              >
-                <Image
-                  className="inline-flex shrink-0 cursor-zoom-in rounded-[12px]"
-                  src={Avatar04}
-                  alt="AI-ассистент"
-                />
-              </button>
+      <div className="pointer-events-none absolute inset-0 z-0">
+        <svg width="100%" height="100%" viewBox="0 0 1440 560" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute inset-0 w-full h-full">
+          <defs>
+            <radialGradient id="bg1" cx="50%" cy="0%" r="100%" fx="50%" fy="0%" gradientTransform="rotate(45)">
+              <stop offset="0%" stopColor="#dbeafe" stopOpacity="0.5" />
+              <stop offset="100%" stopColor="#f1f5f9" stopOpacity="0" />
+            </radialGradient>
+            <radialGradient id="bg2" cx="80%" cy="100%" r="100%" fx="80%" fy="100%" gradientTransform="rotate(45)">
+              <stop offset="0%" stopColor="#a5b4fc" stopOpacity="0.3" />
+              <stop offset="100%" stopColor="#f1f5f9" stopOpacity="0" />
+            </radialGradient>
+          </defs>
+          <rect width="1440" height="560" fill="url(#bg1)" />
+          <rect width="1440" height="560" fill="url(#bg2)" />
+        </svg>
+      </div>
+      <div className="relative z-10 mx-auto max-w-4xl px-4 sm:px-6">
+        <div className="mx-auto max-w-2xl pb-10 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2">
+            Как начать пользоваться <p>AI-ассистентом ?</p>
+          </h2>
+          <p className="text-lg text-gray-700 dark:text-gray-300 mb-6">
+            Всего 3 шага — и автоматизация ваших соцсетей готова к работе!
+          </p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
+          {/* Step 1 */}
+          <div className="flex flex-col items-center text-center fade-up-step" style={{animationDelay: '0ms'}}>
+            <div className="mb-4 flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-200 via-blue-400 to-blue-600 dark:from-blue-900 dark:via-blue-700 dark:to-blue-500 shadow-lg border-4 border-white dark:border-gray-800">
+              <svg className="w-10 h-10 text-white drop-shadow-lg" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" /></svg>
             </div>
-            {/* Modal for zoomed image */}
-            <div
-              id="zoom-modal"
-              style={{ display: 'none' }}
-              className="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 backdrop-blur-sm"
-              onClick={e => {
-                if (e.target === e.currentTarget) (e.currentTarget as HTMLElement).style.display = 'none';
-              }}
-            >
-              <div className="relative">
-                <Image
-                  src={Avatar04}
-                  alt="AI-ассистент увеличено"
-                  className="max-h-[80vh] max-w-[90vw] rounded-[12px] shadow-2xl"
-                  priority
-                />
-                <button
-                  type="button"
-                  className="absolute right-2 top-2 rounded-full bg-white/80 p-2 text-gray-800 hover:bg-white"
-                  onClick={e => {
-                    const modal = document.getElementById('zoom-modal');
-                    if (modal) modal.style.display = 'none';
-                    e.stopPropagation();
-                  }}
-                  aria-label="Закрыть увеличенное изображение"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="h-6 w-6">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
-              </div>
-            </div>
-            <p className="text-mg text-indigo-200/65">
-              Гибкий старт для всех: Неважно, новичок вы или профи — наш AI-ассистент готов к запуску в 1 клик. Хотите — управляйте через визуальный интерфейс. Нужно больше контроля — запускайте в терминале.
-            </p>
+            <h3 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">Скачайте и установите</h3>
+            <p className="text-gray-600 dark:text-gray-300 text-sm">Загрузите программу для вашей ОС. Следуйте инструкциям установщика или руководству.</p>
           </div>
-          {/* Spotlight items */}
-          <Spotlight className="group mx-auto grid max-w-sm items-stretch gap-6 lg:max-w-none lg:grid-cols-3">
-            {/* Card 1: Windows Installer */}
-            <div
-              ref={el => {
-                cardRefs.current[0] = el as HTMLDivElement | null;
-              }}
-              className={`group/card relative h-full overflow-hidden rounded-2xl bg-gray-800 p-px transition-all duration-700 ${
-                cardInView[0] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-              } before:pointer-events-none before:absolute before:-left-40 before:-top-40 before:z-10 before:h-80 before:w-80 before:translate-x-[var(--mouse-x)] before:translate-y-[var(--mouse-y)] before:rounded-full before:bg-indigo-500/80 before:opacity-0 before:blur-3xl before:transition-opacity before:duration-500 after:pointer-events-none after:absolute after:-left-48 after:-top-48 after:z-30 after:h-64 after:w-64 after:translate-x-[var(--mouse-x)] after:translate-y-[var(--mouse-y)] after:rounded-full after:bg-indigo-500 after:opacity-0 after:blur-3xl after:transition-opacity after:duration-500 hover:after:opacity-20 group-hover:before:opacity-100`}
-              style={{ transitionProperty: "opacity, transform" }}
-            >
-              <div className="relative z-20 h-full overflow-hidden rounded-[inherit] bg-gray-950 after:absolute after:inset-0 after:bg-linear-to-br after:from-gray-900/50 after:via-gray-800/25 after:to-gray-900/50">
-                <div className="p-6 flex flex-col h-full">
-                  <div className="mb-3 text-center">
-                    <span className="block font-bold text-xl text-white mb-1">Установщик</span>
-                  </div>
-                  <p className="text-indigo-200/65 mb-2">Быстрый старт AI-ассистента для ведения аккаунтов<br/>Установочный файл включает всё необходимое для мгновенного запуска AI-автоматизации. Рекомендуется для пользователей Windows, желающих быстро приступить к работе без лишних настроек.</p>
-                  <div className="mt-4 mb-2">
-                    <div className="w-full rounded-lg bg-gray-900 border border-gray-700 px-4 py-2 text-center text-white font-mono text-base mb-1">AIAssistant_Setup.exe</div>
-                  </div>
-                  <div className="flex-1 flex flex-col justify-end">
-                    <a
-                      className="btn group mb-4 w-full bg-linear-to-t from-blue-600 to-blue-500 bg-[length:100%_100%] bg-[bottom] text-white shadow-sm hover:bg-[length:100%_150%] sm:mb-0 sm:w-auto transition-transform duration-200 hover:scale-105"
-                      href="#0"
-                    >
-                      <span className="relative inline-flex items-center">
-                        Скачать EXE
-                      </span>
-                    </a>
-                  </div>
-                </div>
-              </div>
+          {/* Step 2 */}
+          <div className="flex flex-col items-center text-center fade-up-step" style={{animationDelay: '150ms'}}>
+            <div className="mb-4 flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-200 via-blue-400 to-blue-600 dark:from-blue-900 dark:via-blue-700 dark:to-blue-500 shadow-lg border-4 border-white dark:border-gray-800">
+              <svg className="w-10 h-10 text-white drop-shadow-lg" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M16 12A4 4 0 1 1 8 12a4 4 0 0 1 8 0zm2 4v2a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-2" /></svg>
             </div>
-            {/* Card 2: Full Package */}
-            <div
-              ref={el => {
-                cardRefs.current[1] = el as HTMLDivElement | null;
-              }}
-              className={`group/card relative h-full overflow-hidden rounded-2xl bg-gray-800 p-px transition-all duration-700 ${
-                cardInView[1] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-              } before:pointer-events-none before:absolute before:-left-40 before:-top-40 before:z-10 before:h-80 before:w-80 before:translate-x-[var(--mouse-x)] before:translate-y-[var(--mouse-y)] before:rounded-full before:bg-indigo-500/80 before:opacity-0 before:blur-3xl before:transition-opacity before:duration-500 after:pointer-events-none after:absolute after:-left-48 after:-top-48 after:z-30 after:h-64 after:w-64 after:translate-x-[var(--mouse-x)] after:translate-y-[var(--mouse-y)] after:rounded-full after:bg-indigo-500 after:opacity-0 after:blur-3xl after:transition-opacity after:duration-500 hover:after:opacity-20 group-hover:before:opacity-100`}
-              style={{ transitionProperty: "opacity, transform" }}
-            >
-              <div className="relative z-20 h-full overflow-hidden rounded-[inherit] bg-gray-950 after:absolute after:inset-0 after:bg-linear-to-br after:from-gray-900/50 after:via-gray-800/25 after:to-gray-900/50">
-                <div className="p-6 flex flex-col h-full">
-                  <div className="mb-3 text-center">
-                    <span className="block font-bold text-xl text-white mb-1">Полный архив</span>
-                  </div>
-                  <p className="text-indigo-200/65 mb-2">AI-ассистент на базе n8n + конфигурации<br/>Рекомендуемый пакет. Включает саму систему автоматизации n8n, предварительно настроенные рабочие процессы для ведения аккаунтов и инструкцию по запуску на всех популярных ОС: Windows, macOS, Linux.</p>
-                  <div className="mt-4 mb-2">
-                    <div className="w-full rounded-lg bg-gray-900 border border-gray-700 px-4 py-2 text-center text-white font-mono text-base mb-1">AIAssistant_Full_Package.zip</div>
-                  </div>
-                  <div className="flex-1 flex flex-col justify-end">
-                    <a
-                      className="btn group mb-4 w-full bg-linear-to-t from-blue-600 to-blue-500 bg-[length:100%_100%] bg-[bottom] text-white shadow-sm hover:bg-[length:100%_150%] sm:mb-0 sm:w-auto transition-transform duration-200 hover:scale-105"
-                      href="#0"
-                    >
-                      <span className="relative inline-flex items-center">
-                        Скачать ZIP
-                      </span>
-                    </a>
-                  </div>
-                </div>
-              </div>
+            <h3 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">Настройте интеграции</h3>
+            <p className="text-gray-600 dark:text-gray-300 text-sm">Добавьте соцсети и настройте сценарии автоматизации при первом запуске.</p>
+          </div>
+          {/* Step 3 */}
+          <div className="flex flex-col items-center text-center fade-up-step" style={{animationDelay: '300ms'}}>
+            <div className="mb-4 flex items-center justify-center w-20 h-20 rounded-2xl bg-gradient-to-br from-blue-200 via-blue-400 to-blue-600 dark:from-blue-900 dark:via-blue-700 dark:to-blue-500 shadow-lg border-4 border-white dark:border-gray-800">
+              <svg className="w-10 h-10 text-white drop-shadow-lg" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
             </div>
-            {/* Card 3: PDF Guide */}
-            <div
-              ref={el => {
-                cardRefs.current[2] = el as HTMLDivElement | null;
-              }}
-              className={`group/card relative h-full overflow-hidden rounded-2xl bg-gray-800 p-px transition-all duration-700 ${
-                cardInView[2] ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
-              } before:pointer-events-none before:absolute before:-left-40 before:-top-40 before:z-10 before:h-80 before:w-80 before:translate-x-[var(--mouse-x)] before:translate-y-[var(--mouse-y)] before:rounded-full before:bg-indigo-500/80 before:opacity-0 before:blur-3xl before:transition-opacity before:duration-500 after:pointer-events-none after:absolute after:-left-48 after:-top-48 after:z-30 after:h-64 after:w-64 after:translate-x-[var(--mouse-x)] after:translate-y-[var(--mouse-y)] after:rounded-full after:bg-indigo-500 after:opacity-0 after:blur-3xl after:transition-opacity after:duration-500 hover:after:opacity-20 group-hover:before:opacity-100`}
-              style={{ transitionProperty: "opacity, transform" }}
-            >
-              <div className="relative z-20 h-full overflow-hidden rounded-[inherit] bg-gray-950 after:absolute after:inset-0 after:bg-linear-to-br after:from-gray-900/50 after:via-gray-800/25 after:to-gray-900/50">
-                <div className="p-6 flex flex-col h-full">
-                  <div className="mb-3 text-center">
-                    <span className="block font-bold text-xl text-white mb-1">PDF Инструкция</span>
-                  </div>
-                  <p className="text-indigo-200/65 mb-2">Пошаговое руководство по установке и запуску<br/>Официальное руководство поможет вам развернуть AI-систему под любые задачи: от создания контента до сбора аналитики. Содержит примеры, схемы и советы по оптимизации.</p>
-                  <div className="mt-4 mb-2">
-                    <div className="w-full rounded-lg bg-gray-900 border border-gray-700 px-4 py-2 text-center text-white font-mono text-base mb-1">AIAssistant_Guide.pdf</div>
-                  </div>
-                  <div className="flex-1 flex flex-col justify-end">
-                    <a
-                      className="btn group mb-4 w-full bg-linear-to-t from-blue-600 to-blue-500 bg-[length:100%_100%] bg-[bottom] text-white shadow-sm hover:bg-[length:100%_150%] sm:mb-0 sm:w-auto transition-transform duration-200 hover:scale-105"
-                      href="#0"
-                    >
-                      <span className="relative inline-flex items-center">
-                        Скачать PDF
-                      </span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </Spotlight>
+            <h3 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">Начните автоматизацию!</h3>
+            <p className="text-gray-600 dark:text-gray-300 text-sm">Планируйте публикации, отслеживайте аналитику, получайте результат без рутины.</p>
+          </div>
+        </div>
+        {/* Bonus/Tip Area */}
+        <div className="bg-blue-50 dark:bg-blue-900/40 rounded-xl p-6 mb-8 text-sm text-gray-700 dark:text-gray-200 text-center">
+          <div className="mb-2 font-semibold text-blue-700 dark:text-blue-300">Дополнительно:</div>
+          <div className="mb-1">Для опытных пользователей — запуск из терминала.</div>
+          <div className="mb-1">Все данные — только на вашем устройстве или по защищённым каналам.</div>
+          <div>Возникли вопросы? PDF-инструкция и поддержка всегда доступны.</div>
+        </div>
+        {/* Download Buttons */}
+        <div className="flex flex-col md:flex-row justify-center gap-4 mb-2">
+          <a href="#0" className="inline-block px-6 py-3 rounded-lg bg-blue-600 text-white font-bold shadow hover:bg-blue-700 transition">Скачать EXE</a>
+          <a href="#0" className="inline-block px-6 py-3 rounded-lg bg-blue-500 text-white font-bold shadow hover:bg-blue-600 transition">Скачать ZIP</a>
+          <a href="#0" className="inline-block px-6 py-3 rounded-lg bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-white font-bold shadow hover:bg-gray-300 dark:hover:bg-gray-600 transition">PDF-инструкция</a>
         </div>
       </div>
+      <style jsx>{`
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(32px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .animate-fadeIn {
+          animation: fadeIn 1s cubic-bezier(0.4,0,0.2,1) both;
+        }
+        .fade-up-step {
+          opacity: 0;
+          transform: translateY(32px);
+          animation: fadeUp 0.7s cubic-bezier(0.4,0,0.2,1) forwards;
+        }
+        .fade-up-step:nth-child(1) { animation-delay: 0ms; }
+        .fade-up-step:nth-child(2) { animation-delay: 150ms; }
+        .fade-up-step:nth-child(3) { animation-delay: 300ms; }
+        @keyframes fadeUp {
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
     </section>
   );
 }
