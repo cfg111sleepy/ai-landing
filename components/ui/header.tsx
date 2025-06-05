@@ -11,10 +11,12 @@ export default function Header() {
         <div className="relative flex h-14 items-center justify-between gap-3 rounded-2xl bg-white/90 px-3 shadow-lg shadow-black/[0.03] backdrop-blur-xs before:pointer-events-none before:absolute before:inset-0 before:rounded-[inherit] before:border before:border-transparent before:[background:linear-gradient(var(--color-gray-100),var(--color-gray-200))_border-box] before:[mask-composite:exclude_!important] before:[mask:linear-gradient(white_0_0)_padding-box,_linear-gradient(white_0_0)]">
           {/* Site branding and name */}
           <div className="flex items-center gap-3">
-            <Logo />
-            <span className="font-extrabold text-lg md:text-xl">
-              TrendPilot.AI
-            </span>
+            <Link href="/" className="flex items-center gap-3 group" aria-label="Cruip">
+              <Logo />
+              <span className="font-extrabold text-lg md:text-xl group-hover:underline">
+                TrendPilot.AI
+              </span>
+            </Link>
           </div>
           {/* Desktop nav */}
           <div className="hidden md:flex flex-1 items-center justify-end gap-6">
@@ -44,7 +46,7 @@ export default function Header() {
               <li>
                 <Link
                   className="text-gray-600 transition hover:text-gray-900 hover:underline underline-offset-4"
-                  href="#version-selector"
+                  href="/plans"
                 >
                   Тарифы и планы
                 </Link>
@@ -102,7 +104,7 @@ export default function Header() {
                 </Link>
                 <Link
                   className="block px-4 py-2 text-gray-700 hover:text-blue-700 hover:underline underline-offset-4"
-                  href="#version-selector"
+                  href="/plans"
                   onClick={() => setMobileOpen(false)}
                 >
                   Тарифы и планы
