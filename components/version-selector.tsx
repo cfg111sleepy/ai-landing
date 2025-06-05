@@ -193,8 +193,6 @@ export default function VersionSelector() {
 							<span className="pointer-events-none absolute left-1/2 z-50 mt-2 w-72 -translate-x-1/2 rounded-lg bg-gray-900 px-4 py-3 text-xs text-white opacity-0 group-hover:opacity-100 group-focus-within:opacity-100 transition-opacity duration-200 shadow-xl whitespace-pre-line text-left">
 								Пример: 2 страницы Facebook и 2 аккаунта Instagram считаются как 4 социальных аккаунта.
 								<br />
-								<br />
-								За каждые 9 социальных аккаунтов — 10-й бесплатно.
 							</span>
 						</span>
 					</span>
