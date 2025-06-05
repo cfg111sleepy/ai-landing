@@ -11,8 +11,10 @@ const preConnect = [
   "# Fetching available accounts",
 ];
 const postConnect = [
-  "- @user1 (Telegram)      - @page_admin (Facebook)",
-  "- @socialboss (Instagram) - @main_channel (Discord)",
+  "- @user1 (Telegram)",
+  " - @page_admin (Facebook)",
+  "- @socialboss (Instagram)",
+  " - @main_channel (Discord)",
   "# Posting to Telegram as @user1...",
   "Post link: https://t.me/socialboss/212",
   "Editor is now accessible via: http://localhost:5678",
@@ -24,8 +26,9 @@ export default function TerminalInstallN8N() {
   const [showPost, setShowPost] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
   const ref = useRef<HTMLDivElement | null>(null);
+  const totalSteps = preConnect.length + postConnect.length;
 
-  // Запускати анімацію тільки коли блок зʼявиться у viewport
+  // Intersection Observer для запуску анімації коли термінал на екрані
   useEffect(() => {
     const observer = new window.IntersectionObserver(
       (entries) => {
@@ -41,7 +44,7 @@ export default function TerminalInstallN8N() {
     return () => observer.disconnect();
   }, [hasStarted]);
 
-  // Кроки анімації
+  // Кроки анімації і автоперезапуск через 20с після завершення
   useEffect(() => {
     if (!hasStarted) return;
     if (!showPost) {
@@ -53,8 +56,15 @@ export default function TerminalInstallN8N() {
         return () => clearTimeout(timeout);
       }
     } else {
-      if (step < preConnect.length + postConnect.length) {
+      if (step < totalSteps) {
         const timeout = setTimeout(() => setStep(step + 1), 700);
+        return () => clearTimeout(timeout);
+      } else {
+        // Коли всі рядки показані, через 20 секунд все скидається і анімація починається знову
+        const timeout = setTimeout(() => {
+          setStep(0);
+          setShowPost(false);
+        }, 20000);
         return () => clearTimeout(timeout);
       }
     }
