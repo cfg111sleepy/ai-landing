@@ -11,6 +11,7 @@ import Cta from "@/components/cta";
 import VersionSelector from "@/components/version-selector";
 import Testimonials from "@/components/testimonials";
 import TerminalInstallN8N from "@/components/terminal-install-n8n";
+import FaqSection from "@/components/faq-section";
 
 export default function Home() {
   return (
@@ -24,6 +25,7 @@ export default function Home() {
         <TerminalInstallN8N />
       </div>
       <Testimonials />
+      <FaqSection />
       <Cta />
     </>
   );
